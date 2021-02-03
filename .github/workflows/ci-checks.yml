@@ -17,28 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Install dependencies
-      #   run: npm ci
-
-      # - name: Generate inputs and outputs
-      #   run: |
-      #     npx action-io-generator --outFile='${{ env.GENERATED_FILENAME }}'
-
-      # - name: Test equivalence
-      #   run: git --no-pager diff --no-index --exit-code '${{ env.COMMITTED_FILENAME }}' '${{ env.GENERATED_FILENAME }}'
-
-      # - name: Print contents
-      #   if: ${{ failure() }}
-      #   run: |
-      #     echo "----- Contents of ${{ env.GENERATED_FILENAME }} -----"
-      #     cat '${{ env.GENERATED_FILENAME }}'
-      #     echo "----- End Contents ----"
-
-      #     echo "---- Contents of ${{ env.COMMITTED_FILENAME }} -----"
-      #     cat '${{ env.COMMITTED_FILENAME }}'
-      #     echo "---- End Contents -----"
-      - name: Run Input output checker
-        uses: divyansh42/io-checker@main
+      - name: Run input output checker
+        uses: divyansh42/common/action-io-generator@add-io-checker
+        with:
+          io_file: src/generated/inputs-outputs.ts
 
   check-dist:
     name: Check Distribution
